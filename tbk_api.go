@@ -17,7 +17,7 @@ func sign(secret string, params url.Values) string {
 	joinedParams := ""
 	keys := make([]string , 0)
 	for key, _ := range params {
-			keys = append(keys, key);'
+			keys = append(keys, key)
 	}
 	sort.Strings(keys)
 	for i := range keys {
@@ -78,7 +78,7 @@ func (t *TaobaoRequest) DelValue(key string)  {
 	t.values.Del(key)
 }
 
-func (t *TaobaoRequest) GetResponse(methodName string, resp interface{}, session string) ([]byte, error, *TopErrorr)  {
+func (t *TaobaoRequest) GetResponse(methodName string, resp interface{}, session string) ([]byte, error, *TopError)  {
 	t.SetReqUrl(TaobaoUrl)
 	t.SetValue("format", "json")
 	t.SetValue("v", "2.0")
@@ -105,7 +105,7 @@ func (t *TaobaoRequest) GetResponse(methodName string, resp interface{}, session
 		return data, progErr, topErr
 	}
 	var errResp TaobaoErrResponse
-	proErr = json.Unmarshal(data, &errResp)
+	progErr = json.Unmarshal(data, &errResp)
 	if progErr != nil {
 		return data, progErr, topErr
 	}
